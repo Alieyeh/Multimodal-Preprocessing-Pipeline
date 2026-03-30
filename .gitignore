@@ -1,0 +1,42 @@
+# Python caches and build artefacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Large generated data trees that should not be uploaded
+data/raw/
+data/interim/
+data/processed/
+submission_sample/
+
+# Optional local notebook checkpoints
+.ipynb_checkpoints/

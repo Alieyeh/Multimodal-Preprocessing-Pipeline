@@ -1,0 +1,10 @@
+{
+  "stage": "setup",
+  "log_path": "/home/asus/multimodal-preprocessing-pipeline/data/logs/setup_20260330_145005.log",
+  "measured_at_local": "2026-03-30T16:34:06",
+  "attempt_count": 1,
+  "duration_seconds": 6147.66,
+  "cumulative_duration_seconds": 6147.66,
+  "peak_rss_bytes": 257024000,
+  "peak_rss_bytes_across_attempts": 257024000
+}

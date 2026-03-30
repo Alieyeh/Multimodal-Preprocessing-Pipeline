@@ -1,0 +1,10 @@
+{
+  "stage": "validate",
+  "log_path": "/home/asus/multimodal-preprocessing-pipeline/data/logs/validate_20260330_174048.log",
+  "measured_at_local": "2026-03-30T17:40:48",
+  "attempt_count": 3,
+  "duration_seconds": 0.1,
+  "cumulative_duration_seconds": 46.132,
+  "peak_rss_bytes": 103542784,
+  "peak_rss_bytes_across_attempts": 2298023936
+}

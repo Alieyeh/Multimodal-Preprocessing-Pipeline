@@ -1,0 +1,125 @@
+seed: 42
+runtime:
+  setup_mode: strict   # strict | best-effort
+  preprocess_mode: best-effort   # strict | best-effort
+  setup_workers: 8
+  ptbxl_download_workers: 8   # set to 1 for per-file byte bars; >1 favors throughput with overall file-count progress
+  http_timeout_seconds: 60
+  retry_count: 3
+  remove_archives_after_extract: true   # minimizes raw-storage redundancy once archive-backed datasets are extracted
+paths:
+  raw_dir: data/raw
+  interim_dir: data/interim
+  processed_dir: data/processed
+  reports_dir: reports
+  submission_sample_dir: submission_sample
+
+datasets:
+  pamap2:
+    source_url: https://archive.ics.uci.edu/static/public/231/pamap2%2Bphysical%2Bactivity%2Bmonitoring.zip
+    dataset_version: null
+    required: true
+  wisdm:
+    source_url: https://archive.ics.uci.edu/static/public/507/wisdm%2Bsmartphone%2Band%2Bsmartwatch%2Bactivity%2Band%2Bbiometrics%2Bdataset.zip
+    dataset_version: null
+    required: true
+  mhealth:
+    source_url: https://archive.ics.uci.edu/static/public/319/mhealth%2Bdataset.zip
+    dataset_version: null
+    required: false
+  eegmmidb:
+    source_url: https://physionet.org/files/eegmmidb/1.0.0/
+    dataset_version: 1.0.0
+    physionet_slug: eegmmidb
+    required: true
+  ptbxl:
+    source_url: https://physionet.org/files/ptb-xl/1.0.3/
+    dataset_version: 1.0.3
+    physionet_slug: ptb-xl
+    required: true
+
+har:
+  target_hz: 20
+  channel_schema: [acc_x, acc_y, acc_z, gyro_x, gyro_y, gyro_z]
+  pretrain_window_seconds: 10
+  pretrain_overlap_seconds: 0
+  supervised_window_seconds: 5
+  supervised_overlap_seconds: 2.5
+  label_policy: majority_non_null   # currently supported HAR label assignment rule
+  null_labels: [0, null, "null", "transient"]
+  output_dtype: float32
+  standardize_per_window: true   # z-score each retained HAR window per channel after window extraction
+  clip_zscore_at: 8.0
+  label_schema_name: har_unified_v1   # default supervised-label schema name recorded in HAR metadata; can be renamed if label maps are customized
+  label_maps:
+    pamap2:
+      "1": lying
+      "2": sitting
+      "3": standing
+      "4": walking
+      "5": running
+      "6": cycling
+      "7": walking
+      "12": stairs
+      "13": stairs
+      "16": household
+      "17": household
+    wisdm:
+      walking: walking
+      jogging: running
+      upstairs: stairs
+      downstairs: stairs
+      sitting: sitting
+      standing: standing
+    mhealth:
+      "1": standing
+      "2": sitting
+      "3": lying
+      "4": walking
+      "5": stairs
+      "6": stairs
+      "7": running
+      "8": cycling
+      "9": other
+      "10": household
+
+pamap2:
+  enabled: true
+  shared_stream: wrist
+  source_sampling_rate_hz: 100
+
+wisdm:
+  enabled: true
+  shared_stream: watch
+  source_sampling_rate_hz: 20
+
+mhealth:
+  enabled: true
+  shared_stream: right_lower_arm
+  source_sampling_rate_hz: 50
+
+eeg:
+  enabled: true
+  runs: [4, 8, 12]
+  subjects: null   # null means all 109 subjects
+  sampling_rate_hz: 160
+  keep_native_rate: true   # retains native rate only when it already matches the configured fixed bundled rate
+  download_workers: 8
+  window_seconds: 4
+  include_t0: false   # optionally retain rest windows in addition to the default T1/T2 imagery windows
+  event_codes: [T1, T2]
+  rereference: average
+  bandpass_hz: [1.0, 40.0]
+  notch_hz: 60.0   # adjust to 50.0 where mains frequency is 50 Hz
+  normalize_per_window: true
+  qc_flags_default: []
+
+ecg:
+  enabled: true
+  sampling_rate_hz: 100
+  holdout_fold: 10
+  train_folds: [1,2,3,4,5,6,7,8,9]
+  normalize_per_record: true
+  remove_per_lead_mean: true
+  lead_order: [I, II, III, aVR, aVL, aVF, V1, V2, V3, V4, V5, V6]
+  max_records: null

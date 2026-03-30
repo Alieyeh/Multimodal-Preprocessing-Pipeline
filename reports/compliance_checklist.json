@@ -1,0 +1,13 @@
+{
+  "dataset_outputs": {
+    "eegmmidb": 2,
+    "mhealth": 4,
+    "pamap2": 4,
+    "ptbxl": 2,
+    "wisdm": 4
+  },
+  "interim_stage_materialized": true,
+  "issues": [],
+  "preprocess_mode": "best-effort",
+  "processed_manifest_written": true
+}

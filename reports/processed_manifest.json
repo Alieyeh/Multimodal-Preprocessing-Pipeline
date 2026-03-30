@@ -1,0 +1,122 @@
+[
+  {
+    "bytes": 16647964,
+    "n_rows": 3843,
+    "path": "data/processed/har/pamap2_pretrain.npz",
+    "shape": [
+      3843,
+      6,
+      200
+    ]
+  },
+  {
+    "bytes": 1293100,
+    "n_rows": 3843,
+    "path": "data/processed/har/pamap2_pretrain.csv"
+  },
+  {
+    "bytes": 23930681,
+    "n_rows": 11099,
+    "path": "data/processed/har/pamap2_supervised.npz",
+    "shape": [
+      11099,
+      6,
+      100
+    ]
+  },
+  {
+    "bytes": 3856577,
+    "n_rows": 11099,
+    "path": "data/processed/har/pamap2_supervised.csv"
+  },
+  {
+    "bytes": 414475699,
+    "n_rows": 119936,
+    "path": "data/processed/har/wisdm_pretrain.npz",
+    "shape": [
+      119936,
+      6,
+      200
+    ]
+  },
+  {
+    "bytes": 42531904,
+    "n_rows": 119936,
+    "path": "data/processed/har/wisdm_pretrain.csv"
+  },
+  {
+    "bytes": 796118606,
+    "n_rows": 479777,
+    "path": "data/processed/har/wisdm_supervised.npz",
+    "shape": [
+      479777,
+      6,
+      100
+    ]
+  },
+  {
+    "bytes": 177794315,
+    "n_rows": 479777,
+    "path": "data/processed/har/wisdm_supervised.csv"
+  },
+  {
+    "bytes": 9209989,
+    "n_rows": 2427,
+    "path": "data/processed/har/mhealth_pretrain.npz",
+    "shape": [
+      2427,
+      6,
+      200
+    ]
+  },
+  {
+    "bytes": 749861,
+    "n_rows": 2427,
+    "path": "data/processed/har/mhealth_pretrain.csv"
+  },
+  {
+    "bytes": 5682956,
+    "n_rows": 2996,
+    "path": "data/processed/har/mhealth_supervised.npz",
+    "shape": [
+      2996,
+      6,
+      100
+    ]
+  },
+  {
+    "bytes": 957985,
+    "n_rows": 2996,
+    "path": "data/processed/har/mhealth_supervised.csv"
+  },
+  {
+    "bytes": 747719743,
+    "n_rows": 4917,
+    "path": "data/processed/eeg/eegmmidb_events.npz",
+    "shape": [
+      4917,
+      64,
+      640
+    ]
+  },
+  {
+    "bytes": 2032044,
+    "n_rows": 4917,
+    "path": "data/processed/eeg/eegmmidb_events.csv"
+  },
+  {
+    "bytes": 601616920,
+    "n_rows": 21799,
+    "path": "data/processed/ecg/ptbxl_records.npz",
+    "shape": [
+      21799,
+      12,
+      1000
+    ]
+  },
+  {
+    "bytes": 3273676,
+    "n_rows": 21799,
+    "path": "data/processed/ecg/ptbxl_records.csv"
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "bytes_downloaded": 688226940,
+    "dataset_name": "pamap2",
+    "downloaded_at_utc": "2026-03-30T13:52:07.886633+00:00",
+    "file_count": 24,
+    "local_path": "/home/asus/multimodal-preprocessing-pipeline/data/raw/pamap2",
+    "notes": "Archive downloaded and recursively extracted (handles nested zip payloads such as WISDM).",
+    "source_url": "https://archive.ics.uci.edu/static/public/231/pamap2%2Bphysical%2Bactivity%2Bmonitoring.zip",
+    "status": "downloaded",
+    "version": "uci-public-231"
+  },
+  {
+    "bytes_downloaded": 310292805,
+    "dataset_name": "wisdm",
+    "downloaded_at_utc": "2026-03-30T13:53:00.957948+00:00",
+    "file_count": 488,
+    "local_path": "/home/asus/multimodal-preprocessing-pipeline/data/raw/wisdm",
+    "notes": "Archive downloaded and recursively extracted (handles nested zip payloads such as WISDM).",
+    "source_url": "https://archive.ics.uci.edu/static/public/507/wisdm%2Bsmartphone%2Band%2Bsmartwatch%2Bactivity%2Band%2Bbiometrics%2Bdataset.zip",
+    "status": "downloaded",
+    "version": "uci-public-507"
+  },
+  {
+    "bytes_downloaded": 75567983,
+    "dataset_name": "mhealth",
+    "downloaded_at_utc": "2026-03-30T13:53:16.232620+00:00",
+    "file_count": 12,
+    "local_path": "/home/asus/multimodal-preprocessing-pipeline/data/raw/mhealth",
+    "notes": "Archive downloaded and recursively extracted (handles nested zip payloads such as WISDM).",
+    "source_url": "https://archive.ics.uci.edu/static/public/319/mhealth%2Bdataset.zip",
+    "status": "downloaded",
+    "version": "uci-public-319"
+  },
+  {
+    "bytes_downloaded": 833940288,
+    "dataset_name": "eegmmidb",
+    "downloaded_at_utc": "2026-03-30T14:42:05.570346+00:00",
+    "file_count": 327,
+    "local_path": "/home/asus/multimodal-preprocessing-pipeline/data/raw/eegmmidb",
+    "notes": "Downloaded EDF files for runs [4, 8, 12] and 109 subjects using direct parallel PhysioNet HTTP.",
+    "source_url": "https://physionet.org/files/eegmmidb/1.0.0/",
+    "status": "downloaded",
+    "version": "1.0.0"
+  },
+  {
+    "bytes_downloaded": 542945487,
+    "dataset_name": "ptbxl",
+    "downloaded_at_utc": "2026-03-30T15:34:05.352333+00:00",
+    "file_count": 43600,
+    "local_path": "/home/asus/multimodal-preprocessing-pipeline/data/raw/ptbxl",
+    "notes": "Downloaded metadata plus all available PTB-XL records at 100 Hz using streamed parallel HTTP.",
+    "source_url": "https://physionet.org/files/ptb-xl/1.0.3/",
+    "status": "downloaded",
+    "version": "1.0.3"
+  }
+]
