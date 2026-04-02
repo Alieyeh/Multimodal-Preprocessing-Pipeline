@@ -301,7 +301,7 @@ Download progress note:
 - This does not indicate a broken download. It reflects missing server-side size metadata, so the downloader can report bytes transferred but not an exact total in advance.
 - The same source may behave slightly differently across runs if redirects, mirrors, cached headers, or resume responses expose different header information.
 - Browser downloads can appear more reliable than CLI downloads on the same source because browsers typically retry more aggressively and handle redirects, mirrors, and partial responses more transparently. The setup script therefore validates downloaded archives before extraction and redownloads them cleanly if they are incomplete.
-- This download-integrity behavior is independent of the \strict` and `best-effort` modes. The runtime modes control whether the stage aborts or continues after a dataset failure, while archive validation and redownload are automatic pre-extraction safeguards that try to repair incomplete downloads before that failure-handling logic is needed.
+- This download-integrity behavior is independent of the `\strict` and `best-effort` modes. The runtime modes control whether the stage aborts or continues after a dataset failure, while archive validation and redownload are automatic pre-extraction safeguards that try to repair incomplete downloads before that failure-handling logic is needed.
 
 ## Sample Pack
 
