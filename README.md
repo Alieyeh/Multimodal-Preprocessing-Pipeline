@@ -158,7 +158,7 @@ pip install -e .[dev,physio]
 
 ## Quick Start
 
-For a standard end-to-end run from a fresh environment, the full Python command sequence is:
+For a standard end-to-end run from a fresh environment, the full Python only (without Wrapper Entrypoint) command sequence is:
 ```bash
 python setup_data.py --config configs/default.yaml
 python preprocess.py --config configs/default.yaml
