@@ -385,6 +385,11 @@ Some metadata fields are intentionally blank for specific output types: HAR pret
 | Artefact | What it contains |
 |---|---|
 | `preprocessing_plan.md` | Concise brief-facing design summary covering schema choices, windowing, label handling, provenance, and resource notes |
+| `submission_sample/sample_pack_manifest.json` | Machine-readable description of the representative sample pack, including expected rows and shapes per sample file |
+| `submission_sample/<modality>/<dataset>/sample_summary.json` | Dataset-level explanation of how each representative sample is composed, including the split across HAR pretrain/supervised sample files |
+| `reports/scientific_justification.md` | Methodological rationale for preprocessing defaults, harmonisation choices, and scientific caveats |
+| `reports/brief_traceability.md` | Requirement-by-requirement mapping from the assessment brief to repository files and outputs |
+| `reports/clinical_dataset_adaptation.md` | Optional note on how the same pipeline design could be adapted to Parkinson's and biobank-style datasets |
 | `reports/download_manifest.json` | Machine-readable setup manifest with dataset source URLs, timestamps, versions, statuses, and download details |
 | `reports/setup_summary.md` | Human-readable summary of setup outcomes across datasets |
 | `reports/reproducibility_context.json` | Lightweight reproducibility provenance recording the active config fingerprint, Python/platform context, and completed stages |
@@ -392,15 +397,11 @@ Some metadata fields are intentionally blank for specific output types: HAR pret
 | `reports/preprocess_summary.md` | Human-readable summary of preprocessing mode, manifest size, and resource-aware execution choices |
 | `reports/processed_manifest.json` | Machine-readable index of generated processed files, including shapes, sizes, and row counts |
 | `reports/preprocess_metrics.json` | Measured preprocess-stage runtime and peak RAM from the latest run, plus cumulative attempt metadata |
-| `submission_sample/sample_pack_manifest.json` | Machine-readable description of the representative sample pack, including expected rows and shapes per sample file |
-| `submission_sample/<modality>/<dataset>/sample_summary.json` | Dataset-level explanation of how each representative sample is composed, including the split across HAR pretrain/supervised sample files |
 | `reports/compliance_checklist.json` | Machine-readable checklist of brief-facing setup/preprocess deliverables and output coverage |
 | `reports/validation_report.md` | Validation results for array integrity, schema checks, harmonisation checks, fold checks, and sample-pack verification |
 | `reports/validate_metrics.json` | Measured validation-stage runtime and peak RAM from the latest run, plus cumulative attempt metadata |
 | `reports/resource_estimate.md` | Storage footprint summary plus measured or estimated RAM/runtime expectations |
-| `reports/scientific_justification.md` | Methodological rationale for preprocessing defaults, harmonisation choices, and scientific caveats |
-| `reports/brief_traceability.md` | Requirement-by-requirement mapping from the assessment brief to repository files and outputs |
-| `reports/clinical_dataset_adaptation.md` | Optional note on how the same pipeline design could be adapted to Parkinson's and biobank-style datasets |
+
 
 For provenance clarity, the setup stage records an explicit source label in the download manifest whenever one can be determined. PhysioNet datasets retain their semantic source versions (`1.0.0`, `1.0.3`), while the UCI datasets fall back to stable repository identifiers (`uci-public-231`, `uci-public-507`, `uci-public-319`) when no semantic version is exposed in the source URL.
 
