@@ -378,6 +378,8 @@ Additional modality-specific fields include:
 
 `validate_outputs.py` also prints a short terminal summary showing the report path, processed-bundle count, sample-pack count, and final PASS/FAIL state. When `--config` is supplied, validation enforces configured EEG runs and event codes, plus config-driven ECG output checks such as sampling rate, lead order, and holdout-fold reporting.
 
+Some metadata fields are intentionally blank for specific output types: HAR pretraining outputs leave `\label_or_event` and `original_label` empty because those windows are unlabeled; EEG outputs keep `split` as `unspecified` because the pipeline preserves event-level provenance without imposing train/validation/test partitions; and ECG outputs leave `cv_fold` empty for held-out test rows because cross-validation metadata apply only to the training partition.
+
 ## Reports and Artefacts
 
 | Artefact | What it contains |
