@@ -3,11 +3,11 @@
 Mode: strict
 
 - pamap2: downloaded (24 files, 688226940 bytes)
-  - notes: Archive downloaded and recursively extracted (handles nested zip payloads such as WISDM).
+  - notes: Archive downloaded and recursively extracted (handles nested zip payloads where present, e.g. WISDM, PAMAP2).
 - wisdm: downloaded (488 files, 310292805 bytes)
-  - notes: Archive downloaded and recursively extracted (handles nested zip payloads such as WISDM).
+  - notes: Archive downloaded and recursively extracted (handles nested zip payloads where present, e.g. WISDM, PAMAP2).
 - mhealth: downloaded (12 files, 75567983 bytes)
-  - notes: Archive downloaded and recursively extracted (handles nested zip payloads such as WISDM).
+  - notes: Archive downloaded and recursively extracted (handles nested zip payloads where present, e.g. WISDM, PAMAP2).
 - eegmmidb: downloaded (327 files, 833940288 bytes)
   - notes: Downloaded EDF files for runs [4, 8, 12] and 109 subjects using direct parallel PhysioNet HTTP.
 - ptbxl: downloaded (43600 files, 542945487 bytes)
