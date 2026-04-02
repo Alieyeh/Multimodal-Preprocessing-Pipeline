@@ -50,16 +50,19 @@ For a quick review, the most useful files to open first are:
 ```mermaid
 flowchart LR
     A["setup_data.*"] --> B["data/raw"]
-    A --> C["reports/download_manifest.json<br/>reports/setup_summary.md<br/>reports/reproducibility_context.json"]
+    A --> C["reports/download_manifest.json<br/>reports/setup_summary.md<br/>reports/reproducibility_context.json<br/>reports/setup_metrics.json"]
+    A --> N["data/logs/<br/>setup_*.log<br/>setup_http_headers_*.jsonl"]
     B --> D["preprocess.py"]
     D --> E["data/interim"]
     D --> F["data/processed"]
-    D --> G["reports/processed_manifest.json<br/>reports/preprocess_summary.md<br/>reports/compliance_checklist.json"]
+    D --> G["reports/processed_manifest.json<br/>reports/preprocess_summary.md<br/>reports/compliance_checklist.json<br/>reports/reproducibility_context.json<br/>reports/preprocess_metrics.json"]
+    D --> O["data/logs/<br/>preprocess_*.log"]
     F --> H["scripts/make_submission_sample.py"]
-    H --> I["submission_sample/<br/>sample_pack_manifest.json<br/>sample_summary.json per dataset"]
+    H --> I["submission_sample/<br/>sample_pack_manifest.json<br/>sample_summary.json per dataset<br/>*_sample.npz + *_sample.csv"]
     F --> J["validate_outputs.py"]
     I --> J
-    J --> K["reports/validation_report.md"]
+    J --> K["reports/validation_report.md<br/>reports/reproducibility_context.json<br/>reports/validate_metrics.json"]
+    J --> P["data/logs/<br/>validate_*.log"]
     F --> L["scripts/estimate_resources.py"]
     E --> L
     L --> M["reports/resource_estimate.md"]
