@@ -120,7 +120,7 @@ Important scope note:
 Example:
 
 ```bash
-git clone [<repository-url>](https://github.com/Alieyeh/Multimodal-Preprocessing-Pipeline/) 
+git clone https://github.com/Alieyeh/Multimodal-Preprocessing-Pipeline/
 cd multimodal-preprocessing-pipeline
 ```
 
