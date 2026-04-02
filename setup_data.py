@@ -649,7 +649,7 @@ def _download_uci_dataset(name: str, url: str, out_dir: Path, timeout: int, retr
         local_path=str(out_dir),
         status=transfer["status"],
         version=resolved_version,
-        notes="Archive downloaded and recursively extracted (handles nested zip payloads such as WISDM).",
+        notes="Archive downloaded and recursively extracted (handles nested zip payloads where present, e.g. WISDM, PAMAP2).",
         file_count=extracted_count,
         bytes_downloaded=transfer["bytes"],
     )
