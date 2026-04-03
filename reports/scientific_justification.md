@@ -66,7 +66,7 @@ Five-second labeled windows are long enough to stabilise human activity labels w
 
 The brief asks for a representative pack with 100 samples per dataset, while the HAR pipeline also needs to expose two distinct outputs per dataset: an unlabeled pretraining bundle and a labeled supervised-evaluation bundle. This submission therefore keeps the processed HAR outputs separate in `data/processed`, because merging 10-second unlabeled windows and 5-second labeled windows into one array would blur two scientifically different tasks and break the fixed-shape output contract.
 
-Instead, the representative sample pack is organised per source dataset and the 100-row dataset budget is split across the corresponding HAR bundles. In the default full-data submission, this yields a balanced 50/50 split between pretraining and supervised HAR samples for each dataset. That interpretation stays faithful to the brief's dataset-level sampling requirement while preserving the methodological distinction between SSL-oriented and supervised-evaluation outputs. Each dataset folder in `submission_sample/` also includes a `sample_summary.json` file so reviewers can see the dataset-level sample total and how it is distributed across the underlying sample artefacts.
+Instead, the representative sample pack is organised per source dataset and the 100-row dataset budget is split across the corresponding HAR bundles. In the default full-data submission, this yields a balanced 50/50 split between pretraining and supervised HAR samples for each dataset. This interpretation stays faithful to the sampling requirement while preserving the methodological distinction between SSL-oriented and supervised-evaluation outputs. Each dataset folder in `submission_sample/` also includes a `sample_summary.json` file so the dataset-level sample total, and how it is distributed across the underlying sample artefacts, can be seen.
 
 ## EEG Preprocessing
 
@@ -110,7 +110,7 @@ For the final processed bundle, one configured output sampling rate is enforced 
 | Broad morphology modelling | generally adequate | stronger temporal fidelity |
 | High-frequency analysis | limited | better supported |
 
-The default is 100 Hz because the brief explicitly allows either choice with justification, and for many morphology-focused representation-learning baselines it preserves the major waveform structure while reducing storage roughly fivefold. The config still allows 500 Hz for users who need finer temporal detail.
+The default is 100 Hz because the brief explicitly allows either choice with justification, and for many morphology-focused representation-learning baselines, it preserves the major waveform structure while reducing storage roughly fivefold. The config still allows 500 Hz for users who need finer temporal detail.
 
 ### PTB-XL Fold Strategy Justification
 
