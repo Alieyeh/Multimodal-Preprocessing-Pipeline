@@ -284,6 +284,10 @@ def run_preprocess(config_path: str | Path, resume: bool = False) -> int:
                         null_labels=null_labels,
                         label_policy=har_label_policy,
                         standardize_per_window=har_standardize,
+                        pretrain_window_seconds=float(cfg["har"].get("pretrain_window_seconds", 10)),
+                        pretrain_overlap_seconds=float(cfg["har"].get("pretrain_overlap_seconds", 0)),
+                        supervised_window_seconds=float(cfg["har"].get("supervised_window_seconds", 5)),
+                        supervised_overlap_seconds=float(cfg["har"].get("supervised_overlap_seconds", 2.5)),
                     )
                     if arr.size:
                         all_arrays.append(arr)

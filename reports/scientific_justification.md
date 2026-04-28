@@ -15,7 +15,7 @@ Across HAR, EEG, and ECG, the processed outputs remain signal-level tensors rath
 
 ### Shared Channel Pairing Justification
 
-The brief recommends a wrist/watch-like six-channel schema. This submission uses:
+The harmonized HAR branch uses a wrist/watch-like six-channel schema:
 
 `acc_x, acc_y, acc_z, gyro_x, gyro_y, gyro_z`
 
@@ -55,7 +55,7 @@ This rule is simple, reproducible, and avoids giving a supervised evaluation sam
 
 ### HAR Sampling and Windowing
 
-- Target rate: 20 Hz, as required by the brief
+- Target rate: 20 Hz
 - Pretraining windows: 10 seconds, no overlap
 - Supervised windows: 5 seconds, 50% overlap
 - Optional per-window standardisation: enabled by default in config, applied after window extraction on a per-channel basis
@@ -64,7 +64,7 @@ Five-second labeled windows are long enough to stabilise human activity labels w
 
 ### Representative Sample-Pack Interpretation
 
-The brief asks for a representative pack with 100 samples per dataset, while the HAR pipeline also needs to expose two distinct outputs per dataset: an unlabeled pretraining bundle and a labeled supervised-evaluation bundle. This submission therefore keeps the processed HAR outputs separate in `data/processed`, because merging 10-second unlabeled windows and 5-second labeled windows into one array would blur two scientifically different tasks and break the fixed-shape output contract.
+The representative pack targets 100 samples per dataset, while the HAR pipeline also exposes two distinct outputs per dataset: an unlabeled pretraining bundle and a labeled supervised-evaluation bundle. The project therefore keeps the processed HAR outputs separate in `data/processed`, because merging 10-second unlabeled windows and 5-second labeled windows into one array would blur two scientifically different tasks and break the fixed-shape output contract.
 
 Instead, the representative sample pack is organised per source dataset and the 100-row dataset budget is split across the corresponding HAR bundles. In the default full-data submission, this yields a balanced 50/50 split between pretraining and supervised HAR samples for each dataset. This interpretation stays faithful to the sampling requirement while preserving the methodological distinction between SSL-oriented and supervised-evaluation outputs. Each dataset folder in `submission_sample/` also includes a `sample_summary.json` file so the dataset-level sample total, and how it is distributed across the underlying sample artefacts, can be seen.
 
@@ -72,7 +72,7 @@ Instead, the representative sample pack is organised per source dataset and the 
 
 ### Why Runs 4, 8, and 12
 
-These runs are the brief's required subset and correspond to a consistent motor-imagery setting with T1/T2 annotations. Restricting the default subset improves comparability and keeps the task focused on correct EDF ingestion and annotation-aligned preprocessing rather than broad task mixing.
+These runs correspond to a consistent motor-imagery setting with T1/T2 annotations. Restricting the default subset improves comparability and keeps the task focused on correct EDF ingestion and annotation-aligned preprocessing rather than broad task mixing.
 
 ### EEG Filtering Justification
 
@@ -89,15 +89,15 @@ These settings are consistent with common motor-imagery EEG preprocessing practi
 
 ### Why the Preprocessing Stays Light
 
-No ICA, CSP, or aggressive subject-specific artifact modelling is performed in the default pipeline. Those methods can be useful for downstream modelling, but they also introduce stronger assumptions and more opportunities to overfit. For this brief, scientifically sound event parsing plus light preprocessing is the more sensible baseline.
+No ICA, CSP, or aggressive subject-specific artifact modelling is performed in the default pipeline. Those methods can be useful for downstream modelling, but they also introduce stronger assumptions and more opportunities to overfit. Here, scientifically sound event parsing plus light preprocessing is the more sensible baseline.
 
 ### EEG Windowing Justification
 
-The final EEG outputs are fixed 4-second windows beginning at T1 or T2 onset by default. That choice matches the brief and aligns with the event-related nature of motor imagery, where class-relevant information is temporally local to the cue. The config can optionally retain T0 rest windows as an extension, but the brief-facing default remains T1/T2 only.
+The final EEG outputs are fixed 4-second windows beginning at T1 or T2 onset by default. That choice aligns with the event-related nature of motor imagery, where class-relevant information is temporally local to the cue. The config can optionally retain T0 rest windows as an extension, but the default remains T1/T2 only.
 
 For EEGMMIDB specifically, the default choice is to retain the native 160 Hz sampling rate because it already matches the configured fixed bundled output rate. Resampling is only used as a fallback when a source file does not match that rate and fixed-shape bundled outputs still need to be preserved.
 
-For the final processed bundle, one configured output sampling rate is enforced so that all EEG windows share one inspectable fixed shape. The `keep_native_rate` flag therefore only preserves the native rate when it already matches the configured bundled rate; if a source EDF differs, the signal is resampled before window extraction. This is a practical requirement for the brief's fixed-shape output contract and is preferable to mixing incompatible window lengths in one bundled array.
+For the final processed bundle, one configured output sampling rate is enforced so that all EEG windows share one inspectable fixed shape. The `keep_native_rate` flag therefore only preserves the native rate when it already matches the configured bundled rate; if a source EDF differs, the signal is resampled before window extraction. This is a practical requirement for a fixed-shape output contract and is preferable to mixing incompatible window lengths in one bundled array.
 
 ## ECG Preprocessing
 
@@ -110,17 +110,17 @@ For the final processed bundle, one configured output sampling rate is enforced 
 | Broad morphology modelling | generally adequate | stronger temporal fidelity |
 | High-frequency analysis | limited | better supported |
 
-The default is 100 Hz because the brief explicitly allows either choice with justification, and for many morphology-focused representation-learning baselines, it preserves the major waveform structure while reducing storage roughly fivefold. The config still allows 500 Hz for users who need finer temporal detail.
+The default is 100 Hz because, for many morphology-focused representation-learning baselines, it preserves the major waveform structure while reducing storage roughly fivefold. The config still allows 500 Hz for users who need finer temporal detail.
 
 ### PTB-XL Fold Strategy Justification
 
-PTB-XL already provides `strat_fold` values designed for leakage-aware benchmarking. This submission therefore uses:
+PTB-XL already provides `strat_fold` values designed for leakage-aware benchmarking. This project therefore uses:
 
-1. Default test split: `strat_fold == holdout_fold` (submission default `10`)
-2. Default training pool: configured non-holdout folds (submission default `[1..9]`)
+1. Default test split: `strat_fold == holdout_fold` (default `10`)
+2. Default training pool: configured non-holdout folds (default `[1..9]`)
 3. Cross-validation metadata: `cv_fold = strat_fold` for non-test rows
 
-This preserves the dataset's native patient-safe structure and avoids inventing a new split scheme unnecessarily. The submission default uses Fold 10 as holdout, but the config, processed metadata, and validation report all follow the configured holdout fold if that default is changed.
+This preserves the dataset's native patient-safe structure and avoids inventing a new split scheme unnecessarily. The default uses Fold 10 as holdout, but the config, processed metadata, and validation report all follow the configured holdout fold if that default is changed.
 
 ### ECG Signal Cleaning Justification
 
@@ -181,4 +181,4 @@ A natural next step is a PyTorch dataset layer that loads `npz` arrays plus CSV 
 
 Streaming downloads, resumable transfers, chunked processing, and restrained interim duplication are not just engineering conveniences. They materially improve reproducibility by making it more realistic to rerun the full pipeline on ordinary hardware without silently changing methodology to fit machine limits.
 
-The preprocessing stage also supports bundle-level resume for long interrupted runs, which is especially important when full public-data preprocessing is used to generate the final submission artefacts.
+The preprocessing stage also supports bundle-level resume for long interrupted runs, which is especially important when full public-data preprocessing is used to generate the final project artefacts.

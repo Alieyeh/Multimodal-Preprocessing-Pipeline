@@ -626,13 +626,13 @@ def validate_processed(
     ]
 
     if sample_dir:
-        lines += ["", "## Submission sample checks", ""]
+        lines += ["", "## Representative sample checks", ""]
         if sample_dir.exists():
             files = sorted(sample_dir.glob("**/*.csv"))
             sample_csv_count = len(files)
             lines.append(f"- sample metadata files: {sample_csv_count}")
             if sample_csv_count == 0:
-                lines.append("- submission sample pack has not been generated yet")
+                lines.append("- representative sample pack has not been generated yet")
             manifest_sample_path = sample_dir / "sample_pack_manifest.json"
             if sample_csv_count == 0 and not manifest_sample_path.exists():
                 sample_pack_ok = True

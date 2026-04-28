@@ -11,7 +11,7 @@ Windowing:
 - HAR pretraining: 10 s unlabeled windows, no overlap.
 - HAR supervised: 5 s windows, 50% overlap, majority non-null label assignment.
 - EEG: 4 s windows from T1/T2 onset by default; optional T0 retention is configurable.
-- ECG: one fixed-length record tensor per PTB-XL sample; the held-out test fold is configurable via `ecg.holdout_fold` (submission default `10`).
+- ECG: one fixed-length record tensor per PTB-XL sample; the held-out test fold is configurable via `ecg.holdout_fold` (default `10`).
 
 HAR label harmonization:
 - Unified labels: `lying, sitting, standing, walking, running, cycling, stairs, household, other`.
@@ -30,4 +30,4 @@ Provenance and splits:
 Resource notes:
 - Downloads stream to disk and skip already-complete files.
 - Processing is file-by-file or record-by-record, but HAR bundle assembly can still dominate RAM.
-- Submission samples cap inspection artifacts at 100 rows per source dataset, with HAR budgets split across pretrain and supervised outputs.
+- Representative samples cap inspection artifacts at 100 rows per source dataset, with HAR budgets split across pretrain and supervised outputs.

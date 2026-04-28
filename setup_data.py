@@ -2,7 +2,7 @@
 """Cross-platform setup entrypoint for folder creation and dataset acquisition.
 
 This wrapper is intentionally responsible for only three things:
-1. Creating the clean brief-facing directory layout.
+1. Creating the project directory layout.
 2. Downloading or simulating raw datasets.
 3. Writing a machine-readable download manifest and setup summary.
 
@@ -161,7 +161,7 @@ def _touch_marker(dir_path: Path, name: str, content: str) -> None:
 
 
 def setup_folders(project_root: Path) -> dict[str, Path]:
-    """Create the full brief-facing folder layout."""
+    """Create the full project folder layout."""
     return {
         "raw": ensure_dir(project_root / "data" / "raw"),
         "interim": ensure_dir(project_root / "data" / "interim"),
@@ -835,7 +835,7 @@ def _write_setup_summary(path: Path, manifest: list[dict], mode: str) -> None:
 
 
 def _write_compliance_checklist(path: Path, manifest: list[dict], include_mhealth: bool, mode: str) -> None:
-    """Write a machine-readable brief-compliance checklist for setup-stage artefacts."""
+    """Write a machine-readable setup checklist for acquired datasets and artefacts."""
     statuses = {m["dataset_name"]: m["status"] for m in manifest}
     checklist = {
         "mode": mode,
@@ -865,7 +865,7 @@ def perform_setup(project_root: Path, include_mhealth: bool = True, simulate_dow
     remove_archives_after_extract = bool(runtime.get("remove_archives_after_extract", True))
 
     progress = ProgressPrinter(total_steps=len(datasets) + 3)
-    progress.stage("Creating repository folders for raw, interim, processed, reports, and submission samples")
+    progress.stage("Creating repository folders for raw, interim, processed, reports, and representative samples")
     progress.stage(f"Preparing scripted dataset acquisition (mode={mode})")
 
     manifest: list[dict] = []

@@ -123,6 +123,10 @@ def make_har_windows(
     null_labels: set,
     label_policy: str = "majority_non_null",
     standardize_per_window: bool = False,
+    pretrain_window_seconds: float = 10.0,
+    pretrain_overlap_seconds: float = 0.0,
+    supervised_window_seconds: float = 5.0,
+    supervised_overlap_seconds: float = 2.5,
 ) -> tuple[np.ndarray, list[dict]]:
     """Convert one harmonised HAR record into final windows and metadata.
 
@@ -143,12 +147,14 @@ def make_har_windows(
     x = df[channel_schema].to_numpy(dtype=np.float32)
     y = df["label"].to_numpy() if "label" in df.columns else None
     if kind == "pretrain":
-        window_size = sampling_rate_hz * 10
-        step_size = window_size
+        window_size = int(round(sampling_rate_hz * pretrain_window_seconds))
+        step_seconds = pretrain_window_seconds - pretrain_overlap_seconds
+        step_size = int(round(sampling_rate_hz * step_seconds))
         windows, labels, starts = sliding_windows(x, None, window_size, step_size, return_starts=True)
     else:
-        window_size = sampling_rate_hz * 5
-        step_size = int(window_size / 2)
+        window_size = int(round(sampling_rate_hz * supervised_window_seconds))
+        step_seconds = supervised_window_seconds - supervised_overlap_seconds
+        step_size = int(round(sampling_rate_hz * step_seconds))
         windows, labels, starts = sliding_windows(
             x,
             y,

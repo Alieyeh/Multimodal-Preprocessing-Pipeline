@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a brief-compliant representative processed sample pack.
+"""Create a representative processed sample pack.
 
 Expected inputs:
 - Processed `.npz` and `.csv` files in `data/processed`.

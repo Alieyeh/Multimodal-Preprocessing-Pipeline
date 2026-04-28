@@ -8,7 +8,7 @@ Reproducible download, harmonisation, preprocessing, validation, and reporting p
 - PTB-XL
 - optional mHealth
 
-This submission follows the brief's separation of concerns:
+The repository follows a clear separation of concerns:
 
 - `setup_data.*`: folder creation, dataset acquisition, setup manifests, and setup logs
 - `preprocess.py`: raw-to-interim-to-processed transformation
@@ -34,8 +34,8 @@ The pipeline also supports bundle-level resume for interrupted preprocessing run
 For a quick review, the most useful files to open first are:
 
 - `README.md` for exact reproduction commands and output structure
-- `preprocessing_plan.md` for the brief-facing design summary
-- `reports/brief_traceability.md` for requirement-by-requirement coverage
+- `preprocessing_plan.md` for the design summary
+- `reports/project_features.md` for a feature-by-feature implementation map
 - `reports/scientific_justification.md` for methodological rationale and caveats
 
 ## At A Glance
@@ -206,7 +206,7 @@ Example override:
 .\preprocess.ps1 --config configs/default.yaml --resume
 ```
 
-### Create Submission Sample and Estimate Resources
+### Create Representative Sample Pack and Estimate Resources
 
 After generating the representative sample pack, rerun validation so the report includes sample-pack checks.
 
@@ -264,7 +264,7 @@ This means setup is intentionally conservative about acquisition failures, while
 
 - Default PTB-XL rate: 100 Hz
 - One processed sample per record
-- Holdout test fold: configurable via `ecg.holdout_fold` (submission default `strat_fold == 10`)
+- Holdout test fold: configurable via `ecg.holdout_fold` (default `strat_fold == 10`)
 - Remaining training records retain `cv_fold`
 - Light preprocessing: per-lead mean removal plus per-record normalisation
 
@@ -387,11 +387,11 @@ Some metadata fields are intentionally blank for specific output types: HAR pret
 
 | Artefact | What it contains |
 |---|---|
-| `preprocessing_plan.md` | Concise brief-facing design summary covering schema choices, windowing, label handling, provenance, and resource notes |
+| `preprocessing_plan.md` | Concise design summary covering schema choices, windowing, label handling, provenance, and resource notes |
 | `submission_sample/sample_pack_manifest.json` | Machine-readable description of the representative sample pack, including expected rows and shapes per sample file |
 | `submission_sample/<modality>/<dataset>/sample_summary.json` | Dataset-level explanation of how each representative sample is composed, including the split across HAR pretrain/supervised sample files |
 | `reports/scientific_justification.md` | Methodological rationale for preprocessing defaults, harmonisation choices, and scientific caveats |
-| `reports/brief_traceability.md` | Requirement-by-requirement mapping from the assessment brief to repository files and outputs |
+| `reports/project_features.md` | Feature-by-feature mapping from project goals to repository files and outputs |
 | `reports/clinical_dataset_adaptation.md` | Optional note on how the same pipeline design could be adapted to Parkinson's and biobank-style datasets |
 | `reports/download_manifest.json` | Machine-readable setup manifest with dataset source URLs, timestamps, versions, statuses, and download details |
 | `reports/setup_summary.md` | Human-readable summary of setup outcomes across datasets |
@@ -400,7 +400,7 @@ Some metadata fields are intentionally blank for specific output types: HAR pret
 | `reports/preprocess_summary.md` | Human-readable summary of preprocessing mode, manifest size, and resource-aware execution choices |
 | `reports/processed_manifest.json` | Machine-readable index of generated processed files, including shapes, sizes, and row counts |
 | `reports/preprocess_metrics.json` | Measured preprocess-stage runtime and peak RAM from the latest run, plus cumulative attempt metadata |
-| `reports/compliance_checklist.json` | Machine-readable checklist of brief-facing setup/preprocess deliverables and output coverage |
+| `reports/compliance_checklist.json` | Machine-readable checklist of setup/preprocess artefacts and output coverage |
 | `reports/validation_report.md` | Validation results for array integrity, schema checks, harmonisation checks, fold checks, and sample-pack verification |
 | `reports/validate_metrics.json` | Measured validation-stage runtime and peak RAM from the latest run, plus cumulative attempt metadata |
 | `reports/resource_estimate.md` | Storage footprint summary plus measured or estimated RAM/runtime expectations |
@@ -419,7 +419,7 @@ Current automated coverage includes:
 - submission sample size checks
 - regression coverage for unified HAR labels and interim/report outputs
 
-The current version of the submission passes `48` automated tests locally.
+The current version of the project passes `48` automated tests locally.
 
 For a measured coverage report rather than just test counts:
 
@@ -428,11 +428,11 @@ python -m pytest --cov=src/mmprep --cov-report=term-missing
 ```
 Validation can run before the representative sample pack is generated, but the report states clearly when `submission_sample/` has not yet been populated. Once sample files exist, validation checks them against `submission_sample/sample_pack_manifest.json`.
 
-This submission reports the number and types of tests by default; it does not claim a numeric coverage percentage unless that command has been run in the current environment.
+This repository reports the number and types of tests by default; it does not claim a numeric coverage percentage unless that command has been run in the current environment.
 
 ## Scientific Caveats
 
-- PTB-XL labels are currently reduced to one primary SCP code per record for a simple record-level output contract; this is practical for the brief but less expressive than the dataset's native multi-label structure.
+- PTB-XL labels are currently reduced to one primary SCP code per record for a simple record-level output contract; this is practical for a lightweight baseline but less expressive than the dataset's native multi-label structure.
 - HAR unmatched activities are routed to `other`, which is operationally convenient but scientifically heterogeneous.
 - EEG per-window z-scoring is a light, defensible default for modelling, but it intentionally deemphasizes absolute amplitude differences.
 - The default 60 Hz notch matches EEGMMIDB's typical mains environment; for 50 Hz environments the config should be changed accordingly.
